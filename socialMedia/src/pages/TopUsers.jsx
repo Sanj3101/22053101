@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchUsers, fetchUserPosts } from "../api";
+import UserCard from "../components/UserCard"; // Import the UserCard component
 
 const TopUsers = () => {
   const [topUsers, setTopUsers] = useState([]);
@@ -30,13 +31,11 @@ const TopUsers = () => {
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-bold">Top 5 Users</h2>
-      <ul>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {topUsers.map((user) => (
-          <li key={user.id} className="border p-2 my-2">
-            {user.name} - {user.postCount} Posts
-          </li>
+          <UserCard key={user.id} name={user.name} postCount={user.postCount} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
