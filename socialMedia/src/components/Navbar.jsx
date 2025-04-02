@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="bg-blue-500 p-4 text-white flex justify-center gap-6">
-      <Link to="/" className="hover:underline">Feed</Link>
-      <Link to="/top-users" className="hover:underline">Top Users</Link>
-      <Link to="/trending-posts" className="hover:underline">Trending Posts</Link>
+    <nav className=" relative flex items-center justify-center bg-gray-700 gap-10 p-4 text-xl w-full ">
+      <Link to="/" className=" hover:text-yellow-400">Feed</Link>
+      <Link to="/top-users" className=" hover:text-yellow-400">Top Users</Link>
+      <Link to="/trending-posts" className=" hover:text-yellow-400">Trending Posts</Link>
     </nav>
   );
 };
