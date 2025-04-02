@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { fetchUserPosts, fetchPostComments } from "../api";
 
+const PostCard = ({ post, commentCount }) => {
+  return (
+    <div className="border p-4 my-2 rounded shadow-md bg-white">
+      <p>{post.content}</p>
+      <span className="text-sm text-gray-600">Comments: {commentCount}</span>
+    </div>
+  );
+};
+
 const TrendingPosts = () => {
   const [trendingPosts, setTrendingPosts] = useState([]);
 
@@ -22,10 +31,9 @@ const TrendingPosts = () => {
       );
 
       const maxComments = Math.max(...Object.values(commentCounts));
-
-      const trending = allPosts.filter(
-        (post) => commentCounts[post.id] === maxComments
-      );
+      const trending = allPosts
+        .filter((post) => commentCounts[post.id] === maxComments)
+        .map((post) => ({ ...post, commentCount: commentCounts[post.id] }));
 
       setTrendingPosts(trending);
     };
@@ -37,10 +45,7 @@ const TrendingPosts = () => {
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-bold">Trending Posts</h2>
       {trendingPosts.map((post) => (
-        <div key={post.id} className="border p-4 my-2">
-          <p>{post.content}</p>
-          <span>Comments: {post.commentCount}</span>
-        </div>
+        <PostCard key={post.id} post={post} commentCount={post.commentCount} />
       ))}
     </div>
   );

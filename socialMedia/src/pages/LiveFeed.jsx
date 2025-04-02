@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchUserPosts } from "../api";
+import PostCard from "../components/PostCard";
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
@@ -28,11 +29,11 @@ const Feed = () => {
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-bold">Live Feed</h2>
-      {posts.map((post) => (
-        <div key={post.id} className="border p-4 my-2">
-          <p>{post.content}</p>
-        </div>
-      ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {posts.map((post) => (
+          <PostCard key={post.id} content={post.content} />
+        ))}
+      </div>
     </div>
   );
 };
